@@ -1,6 +1,6 @@
-.\objects\nvic.o: Basic\nvic\NVIC.c
-.\objects\nvic.o: Basic\nvic\NVIC.h
-.\objects\nvic.o: .\Basic\sys\sys.h
+.\objects\nvic.o: Basic\nvic\nvic.c
+.\objects\nvic.o: Basic\nvic\nvic.h
+.\objects\nvic.o: .\Lib\inc\stm32f10x_exti.h
 .\objects\nvic.o: .\CMSIS\stm32f10x.h
 .\objects\nvic.o: .\CMSIS\core_cm3.h
 .\objects\nvic.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -30,5 +30,10 @@
 .\objects\nvic.o: .\Lib\inc\stm32f10x_usart.h
 .\objects\nvic.o: .\Lib\inc\stm32f10x_wwdg.h
 .\objects\nvic.o: .\Lib\inc\misc.h
+.\objects\nvic.o: .\Basic\usart\usart.h
+.\objects\nvic.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\nvic.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\nvic.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\nvic.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\nvic.o: .\Basic\sys\sys.h
 .\objects\nvic.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
-.\objects\nvic.o: .\Basic\delay\delay.h

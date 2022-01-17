@@ -30,3 +30,5 @@
 .\objects\tim.o: .\Lib\inc\stm32f10x_usart.h
 .\objects\tim.o: .\Lib\inc\stm32f10x_wwdg.h
 .\objects\tim.o: .\Lib\inc\misc.h
+.\objects\tim.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\tim.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h

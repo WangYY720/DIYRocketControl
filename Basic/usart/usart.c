@@ -32,11 +32,11 @@ _sys_exit(int x){
 	x = x; 
 } 
 //重定义fputc函数 
-int fputc(int ch, FILE *f){      
-	while((USART_n->SR&0X40)==0);//循环发送,直到发送完毕   
-    USART_n->DR = (u8) ch;      
-	return ch;
-}
+//int fputc(int ch, FILE *f){      
+//	while((USART_n->SR&0X40)==0);//循环发送,直到发送完毕   
+//    USART_n->DR = (u8) ch;      
+//	return ch;
+//}
 #endif 
 //如果使用ucos,则包括下面的头文件即可.
 #if SYSTEM_SUPPORT_OS

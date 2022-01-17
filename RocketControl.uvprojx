@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Lib\inc;.\Lib\src;.\CMSIS;.\Startup;.\User;.\Basic\i2c;.\Basic\delay;.\Basic\sys;.\Basic\tim;.\Basic\usart;.\FreeRTOS\include;.\FreeRTOS\portable\RVDS\ARM_CM3;.\Basic\nvic;.\Hardware\mpu6050;.\Hardware\mpu6050\eMPL</IncludePath>
+              <IncludePath>.\Lib\inc;.\Lib\src;.\CMSIS;.\Startup;.\User;.\Basic\i2c;.\Basic\delay;.\Basic\sys;.\Basic\tim;.\Basic\usart;.\FreeRTOS\include;.\FreeRTOS\portable\RVDS\ARM_CM3;.\Basic\nvic;.\Hardware\mpu6050;.\Hardware\mpu6050\eMPL;.\Basic\dma;.\Basic\nvic;.\Basic\pwm</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -389,6 +389,26 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Basic\usart\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\dma\bsp_usart_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\pwm\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>nvic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\nvic\nvic.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\tim\tim.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -469,6 +489,11 @@
               <FileName>stm32f10x_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Lib\src\stm32f10x_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Lib\src\stm32f10x_dma.c</FilePath>
             </File>
           </Files>
         </Group>
