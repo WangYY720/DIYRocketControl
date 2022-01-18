@@ -2,7 +2,7 @@
 #include "bsp_usart_dma.h"
 #define FLASH_START_ADDR 0x0801f000
 
-extern u8 temp;
+u8 flag=0;
 extern u8 USART1_Queue[SENDBUFF_SIZE];
 extern float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数
 u16 Queue_Pos=0;															//队列写入位置符
@@ -47,19 +47,21 @@ void TIMx_IRQHandler(void){ 																	//TIMx中断处理函数
 			TIM_ClearITPendingBit(TIMx, TIM_IT_Update);
 		
 			USART1_Queue[Queue_Pos] 	= float2char(angle[0]);
-			USART1_Queue[Queue_Pos+1] = ' ';
-			USART1_Queue[Queue_Pos+2] = float2char(angle[1]);
-			USART1_Queue[Queue_Pos+3] = ' ';
-			USART1_Queue[Queue_Pos+4] = float2char(angle[2]);
-			USART1_Queue[Queue_Pos+5] = ' ';
-			Queue_Pos += 6;
+			USART1_Queue[Queue_Pos+1] = float2char(angle[1]);
+			USART1_Queue[Queue_Pos+2] = float2char(angle[2]);
+			USART1_Queue[Queue_Pos+3] = 0;
+			Queue_Pos += 4;
+//			printf("%d ",Queue_Pos);		//debug
 		if(DMA_GetFlagStatus(USART_TX_DMA_TCFLAG) && !DMA_GetCurrDataCounter(USART_TX_DMA_CHANNEL)){
 			USARTx_DMA_NOAMAL_RESTART();
+			USART_DMACmd(DEBUG_USARTx, USART_DMAReq_Tx ,DISABLE);
 			DMA_ClearFlag(USART_TX_DMA_TCFLAG);
+//			printf("reset\r\n");				//debug
 		}
 		if(Queue_Pos >= SENDBUFF_SIZE){
 			USART_DMACmd(DEBUG_USARTx, USART_DMAReq_Tx ,ENABLE);
 			Queue_Pos = 0;
+//			printf("print\r\n");				//debug
 		}
 	}	
 } 

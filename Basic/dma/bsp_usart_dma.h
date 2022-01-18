@@ -27,9 +27,9 @@
 #define  USART_TX_DMA_TCFLAG      DMA1_FLAG_TC4
 #define  USART_TX_DMA_ITFLAG			DMA_FLAG_TC4
 // 外设寄存器地址
-#define  USART_DR_ADDRESS        (USART1_BASE+0x04)
+#define  USART_DR_ADDRESS    (USART1_BASE+0x04)
 // 一次发送的数据量
-#define  SENDBUFF_SIZE            300
+#define  SENDBUFF_SIZE       100
 
 
 void USART_Config(void);
