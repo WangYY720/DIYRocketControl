@@ -37,6 +37,7 @@
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\Basic\nvic\nvic.h
 .\objects\main.o: .\Basic\tim\tim.h
+.\objects\main.o: .\Basic\pwm\pwm.h
 .\objects\main.o: .\Hardware\mpu6050\mpu6050.h
 .\objects\main.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\main.o: .\Hardware\mpu6050\eMPL\inv_mpu.h

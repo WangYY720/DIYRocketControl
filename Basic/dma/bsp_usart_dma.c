@@ -141,7 +141,7 @@ void USARTx_DMA_Config(void)
 		DMA_InitTypeDef DMA_InitStructure;
 	
 		// 开启DMA时钟
-//		RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+		RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 		// 设置DMA源地址：串口数据寄存器地址*/
     DMA_InitStructure.DMA_PeripheralBaseAddr = USART_DR_ADDRESS;
 		// 内存地址(要传输的变量的指针)
