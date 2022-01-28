@@ -9,13 +9,11 @@
 #include "tim.h"
 #include "pwm.h"
 #include "mpu6050.h"
-#include "inv_mpu.h"
-#include "bsp_usart_dma.h"
+#include "buzzer.h"
 
 u8 USART1_Queue[SENDBUFF_SIZE]={0};								//USARTx DMA发送缓存队列
 u16 frequency = 20;														//数传发送频率(TIMx中断频率)
-float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数
-short temp;																		
+float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数		
 
 extern u8 INT_MARK;														//NVIC中断标志位
 
@@ -28,6 +26,7 @@ int main(void)
 	delay_ms(500);
 	USART_Config();
 	TIM_PWM_Init();
+	Buzzer_Init();
 	
 	if(MPU_Init())													//MPU6050初始化
 		printf("MPU_Init Failed!\r\n");				//返回值为1则初始化失败
@@ -41,10 +40,11 @@ int main(void)
 	
 	delay_ms(50);
 	printf("初始化结束，主循环启动\r\n");
+	BUZZER_BEEP_SHORT2;
 	
 	while(1){  
-		
-			ServoSet(1,angle[0]);
+			
+			Servo1_SetAngle;
 		
 	}
 }

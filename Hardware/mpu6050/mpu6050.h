@@ -1,6 +1,9 @@
 #ifndef __MPU6050_H
 #define __MPU6050_H
-#include "mpuiic.h"   												  	  
+#include "mpuiic.h"   
+#include "inv_mpu.h"
+#include "bsp_usart_dma.h"
+
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK MiniSTM32F103开发板 

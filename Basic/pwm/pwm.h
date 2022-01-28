@@ -16,6 +16,11 @@
 #define 	PWM_GPIO_4	GPIOB
 #define 	PWM_Pin_4		GPIO_Pin_1
 
+#define Servo1_SetAngle ServoSet(1,angle[0])
+#define Servo2_SetAngle ServoSet(2,angle[1])
+#define Servo3_SetAngle ServoSet(3,angle[0])
+#define Servo4_SetAngle ServoSet(4,angle[1])
+
 void TIM_PWM_Init();
 //舵机转角设置函数
 void ServoSet(u8 channel,double degree);

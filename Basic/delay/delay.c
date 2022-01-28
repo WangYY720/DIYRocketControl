@@ -43,8 +43,8 @@
 //delay_intnesting改为：delay_osintnesting
 //////////////////////////////////////////////////////////////////////////////////  
 
-static u8  fac_us=0;							//us延时倍乘数			   
-static u16 fac_ms=0;							//ms延时倍乘数,在ucos下,代表每个节拍的ms数
+static u8  fac_us=9;							//us延时倍乘数			   
+static u16 fac_ms=9000;						//ms延时倍乘数,在ucos下,代表每个节拍的ms数
 	
 	
 #if SYSTEM_SUPPORT_OS							//如果SYSTEM_SUPPORT_OS定义了,说明要支持OS了(不限于UCOS).
@@ -194,7 +194,7 @@ void delay_us(u32 nus)
 	u32 temp;	    	 
 	SysTick->LOAD=nus*fac_us; 					//时间加载	  		 
 	SysTick->VAL=0x00;        					//清空计数器
-	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk ;	//开始倒数	  
+	SysTick->CTRL=SysTick_CTRL_ENABLE_Msk ;	//开始倒数	  
 	do
 	{
 		temp=SysTick->CTRL;

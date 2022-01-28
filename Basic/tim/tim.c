@@ -1,11 +1,12 @@
 #include "tim.h"
 #include "bsp_usart_dma.h"
+#include "pwm.h"
 #define FLASH_START_ADDR 0x0801f000
 
 u8 flag=0;
 extern u8 USART1_Queue[SENDBUFF_SIZE];
 extern float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数
-u16 Queue_Pos=0;															//队列写入位置符
+u16 Queue_Pos=0;																		//队列写入位置符
 
 void TIMx_Init(u16 arr,u16 psc){  														//TIM3 初始化 arr重装载值 psc预分频系数
     TIM_TimeBaseInitTypeDef     TIM_TimeBaseInitStrue;
@@ -63,6 +64,7 @@ void TIMx_IRQHandler(void){ 																	//TIMx中断处理函数
 			Queue_Pos = 0;
 //			printf("print\r\n");				//debug
 		}
+		
 	}	
 } 
 

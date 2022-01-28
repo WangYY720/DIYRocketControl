@@ -42,3 +42,4 @@
 .\objects\main.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\main.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
 .\objects\main.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\main.o: .\Hardware\buzzer.h

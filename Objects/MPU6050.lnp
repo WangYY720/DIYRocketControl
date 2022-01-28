@@ -26,6 +26,7 @@
 ".\objects\inv_mpu.o"
 ".\objects\inv_mpu_dmp_motion_driver.o"
 ".\objects\mpu6050.o"
+".\objects\buzzer.o"
 --strict --scatter ".\Objects\MPU6050.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
