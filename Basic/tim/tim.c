@@ -1,6 +1,7 @@
 #include "tim.h"
 #include "bsp_usart_dma.h"
-#include "pwm.h"
+#include "servo.h"
+
 #define FLASH_START_ADDR 0x0801f000
 
 u8 flag=0;
@@ -64,6 +65,9 @@ void TIMx_IRQHandler(void){ 																	//TIMx中断处理函数
 			Queue_Pos = 0;
 //			printf("print\r\n");				//debug
 		}
+		
+		Pitch_angle = PID_Pitch(angle[0]);
+		Roll_angle  = PID_Roll(angle[1]);
 		
 	}	
 } 

@@ -29,7 +29,7 @@
 ".\objects\buzzer.o"
 ".\objects\pid.o"
 ".\objects\servo.o"
---strict --scatter ".\Objects\MPU6050.sct"
+--strict --scatter ".\Objects\RocketControl.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
---list ".\Listings\MPU6050.map" -o .\Objects\MPU6050.axf
+--list ".\Listings\RocketControl.map" -o .\Objects\RocketControl.axf

@@ -37,9 +37,11 @@
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\Basic\nvic\nvic.h
 .\objects\main.o: .\Basic\tim\tim.h
-.\objects\main.o: .\Basic\pwm\pwm.h
 .\objects\main.o: .\Hardware\mpu6050\mpu6050.h
 .\objects\main.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\main.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
 .\objects\main.o: .\Basic\dma\bsp_usart_dma.h
 .\objects\main.o: .\Hardware\buzzer.h
+.\objects\main.o: .\Hardware\pid.h
+.\objects\main.o: .\Hardware\servo.h
+.\objects\main.o: .\Basic\pwm\pwm.h

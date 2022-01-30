@@ -57,26 +57,6 @@ void TIM_PWM_Init(){  //TIM_PWM初始化 arr重装载值 psc预分频系数
     TIM_Cmd(PWM_TIMx,ENABLE);        																//使能TIM3   
 }
 
-void ServoSet(u8 channel,double degree)
-{
-	switch(channel){
-		case 1:
-			TIM_SetCompare1(PWM_TIMx,(int)((degree/90.0+1.5)*PWMmax/20.0));
-			break;
-		
-		case 2:
-			TIM_SetCompare2(PWM_TIMx,(int)((degree/90.0+1.5)*PWMmax/20.0));
-			break;
-		
-		case 3:
-			TIM_SetCompare3(PWM_TIMx,(int)((degree/90.0+1.5)*PWMmax/20.0));
-			break;
-		
-		case 4:
-			TIM_SetCompare4(PWM_TIMx,(int)((degree/90.0+1.5)*PWMmax/20.0));
-			break;
-		
-	}
-}
+
 
 

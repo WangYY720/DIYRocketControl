@@ -29,7 +29,7 @@
 // 外设寄存器地址
 #define  USART_DR_ADDRESS    (USART1_BASE+0x04)
 // 一次发送的数据量
-#define  SENDBUFF_SIZE       100
+#define  SENDBUFF_SIZE       200
 
 
 void USART_Config(void);

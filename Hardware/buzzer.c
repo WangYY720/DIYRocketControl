@@ -17,22 +17,22 @@ void Buzzer_Init(void)
 void Buzzer_beep_short1(void)
 {
 	BUZZER_ON;
-	for(n=500000;n>1;n--);
+	Delay_ms(500);
 	BUZZER_OFF;
 }
 void Buzzer_beep_long1(void)
 {
 	BUZZER_ON;
-	for(n=2000000;n>1;n--);
+	Delay_ms(2000);
 	BUZZER_OFF;
 }
 void Buzzer_beep_short2(void)
 {
 	BUZZER_ON;
-	for(n=500000;n>1;n--);
+	Delay_ms(500);
 	BUZZER_OFF;
-	for(n=300000;n>1;n--);
+	Delay_ms(200);
 	BUZZER_ON;
-	for(n=500000;n>1;n--);
+	Delay_ms(500);
 	BUZZER_OFF;
 }
