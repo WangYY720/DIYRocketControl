@@ -2,8 +2,6 @@
 #include "stm32f10x_gpio.h"
 #include "delay.h"
 
-u32 n;
-
 void Buzzer_Init(void)
 {
 	GPIO_InitTypeDef     GPIO_InitStrue;
@@ -23,7 +21,7 @@ void Buzzer_beep_short1(void)
 void Buzzer_beep_long1(void)
 {
 	BUZZER_ON;
-	Delay_ms(2000);
+	Delay_ms(1000);
 	BUZZER_OFF;
 }
 void Buzzer_beep_short2(void)

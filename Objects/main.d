@@ -35,6 +35,7 @@
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: .\Basic\internal_flash\internal_flash.h
 .\objects\main.o: .\Basic\nvic\nvic.h
 .\objects\main.o: .\Basic\tim\tim.h
 .\objects\main.o: .\Hardware\mpu6050\mpu6050.h

@@ -48,7 +48,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>MPU6050</OutputName>
+          <OutputName>RocketControl</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -137,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Lib\inc;.\Lib\src;.\CMSIS;.\Startup;.\User;.\Basic\i2c;.\Basic\delay;.\Basic\sys;.\Basic\tim;.\Basic\usart;.\FreeRTOS\include;.\FreeRTOS\portable\RVDS\ARM_CM3;.\Basic\nvic;.\Hardware\mpu6050;.\Hardware\mpu6050\eMPL;.\Basic\dma;.\Basic\nvic;.\Basic\pwm;.\Hardware</IncludePath>
+              <IncludePath>.\Lib\inc;.\Lib\src;.\CMSIS;.\Startup;.\User;.\Basic\i2c;.\Basic\delay;.\Basic\sys;.\Basic\tim;.\Basic\usart;.\FreeRTOS\include;.\FreeRTOS\portable\RVDS\ARM_CM3;.\Basic\nvic;.\Hardware\mpu6050;.\Hardware\mpu6050\eMPL;.\Basic\dma;.\Basic\nvic;.\Basic\pwm;.\Hardware;.\Basic\internal_flash</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -409,6 +409,11 @@
               <FileName>tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Basic\tim\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>internal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Basic\internal_flash\internal_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -544,6 +549,16 @@
               <FileName>buzzer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\buzzer.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\servo.c</FilePath>
             </File>
           </Files>
         </Group>

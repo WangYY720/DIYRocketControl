@@ -34,3 +34,7 @@
 .\objects\usart.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\usart.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\usart.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart.o: .\Hardware\buzzer.h
+.\objects\usart.o: .\Basic\delay\delay.h
+.\objects\usart.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\usart.o: .\Basic\internal_flash\internal_flash.h

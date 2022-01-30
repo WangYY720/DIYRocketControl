@@ -1,7 +1,7 @@
 
 #include "bsp_usart_dma.h"
 
-extern u8 USART1_Queue[SENDBUFF_SIZE];
+extern float USART1_Queue[SENDBUFF_SIZE];
 	
 /**
   * @brief  USART GPIO 配置,工作参数配置

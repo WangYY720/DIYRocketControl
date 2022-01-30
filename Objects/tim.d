@@ -35,3 +35,5 @@
 .\objects\tim.o: .\Hardware\servo.h
 .\objects\tim.o: .\Basic\pwm\pwm.h
 .\objects\tim.o: .\Hardware\pid.h
+.\objects\tim.o: .\Hardware\buzzer.h
+.\objects\tim.o: .\Basic\internal_flash\internal_flash.h

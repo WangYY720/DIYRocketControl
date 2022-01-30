@@ -1,22 +1,9 @@
-
-/*
-//杜洋工作室出品
-//洋桃系列开发板应用程序
-//关注微信公众号：洋桃电子
-//洋桃开发板资料下载 www.DoYoung.net/YT 
-//即可免费看所有教学视频，下载技术资料，技术疑难提问
-//更多内容尽在 杜洋工作室主页 www.doyoung.net
-*/
-
-/*
-《修改日志》
-1-201708271933 加入了秒延时函数。
-
-
-*/
-
 #include "sys.h"
 #include "usart.h"
+#include "buzzer.h"
+#include "delay.h"
+#include "bsp_usart_dma.h"
+#include "internal_flash.h"
 	  	 
 //使UASRT串口可用printf函数发送
 //在usart.h文件里可更换使用printf函数的串口号	  
@@ -76,9 +63,9 @@ void USART1_printf (char *fmt, ...){
 void USART1_Init(u32 bound){ //串口1初始化并启动
     //GPIO端口设置
     GPIO_InitTypeDef GPIO_InitStructure;
-	USART_InitTypeDef USART_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;	 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
+		USART_InitTypeDef USART_InitStructure;
+		NVIC_InitTypeDef NVIC_InitStructure;	 
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA, ENABLE);	//使能USART1，GPIOA时钟
      //USART1_TX   PA.9
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; //PA.9
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -90,44 +77,43 @@ void USART1_Init(u32 bound){ //串口1初始化并启动
     GPIO_Init(GPIOA, &GPIO_InitStructure); 
    //Usart1 NVIC 配置
     NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//子优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
-	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器 
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=1 ;//抢占优先级3
+		NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		//子优先级3
+		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+		NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器 
    //USART 初始化设置
-	USART_InitStructure.USART_BaudRate = bound;//一般设置为9600;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
-	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+		USART_InitStructure.USART_BaudRate = bound;//一般设置为9600;
+		USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+		USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+		USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+		USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+		USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
     USART_Init(USART1, &USART_InitStructure); //初始化串口
-    USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);//开启ENABLE/关闭DISABLE中断
+    USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启ENABLE/关闭DISABLE中断
     USART_Cmd(USART1, ENABLE);                    //使能串口 
 }
 
 void USART1_IRQHandler(void){ //串口1中断服务程序（固定的函数名不能修改）	
 	u8 Res;
-	//以下是字符串接收到USART_RX_BUF[]的程序，(USART_RX_STA&0x3FFF)是数据的长度（不包括回车）
-	//当(USART_RX_STA&0xC000)为真时表示数据接收完成，即超级终端里按下回车键。
-	//在主函数里写判断if(USART_RX_STA&0xC000)，然后读USART_RX_BUF[]数组，读到0x0d 0x0a即是结束。
-	//注意在主函数处理完串口数据后，要将USART_RX_STA清0
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){  //接收中断(接收到的数据必须是0x0d 0x0a结尾)		
-		Res =USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
-		printf("%c",Res); //把收到的数据以 a符号变量 发送回电脑		
-		if((USART1_RX_STA&0x8000)==0){//接收未完成			
-			if(USART1_RX_STA&0x4000){//接收到了0x0d				
-				if(Res!=0x0a)USART1_RX_STA=0;//接收错误,重新开始
-				else USART1_RX_STA|=0x8000;	//接收完成了 
-			}else{ //还没收到0X0D					
-				if(Res==0x0d)USART1_RX_STA|=0x4000;
-				else{
-					USART1_RX_BUF[USART1_RX_STA&0X3FFF]=Res ; //将收到的数据放入数组
-					USART1_RX_STA++;	//数据长度计数加1
-					if(USART1_RX_STA>(USART1_REC_LEN-1))USART1_RX_STA=0;//接收数据错误,重新开始接收	  
-				}		 
-			}
-		}   		 
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){	
+		Res = USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
+		
+		if(Res == 'f'){
+			printf("开始发射程序!\r\n");
+			BUZZER_BEEP_LONG1;
+			Is_Fire=1;					//接收到发射信号
+
+		}
+		
+		if(Res == 'd'){
+			Is_SendData=1;			//接收到发射信号
+		}
+		
+		if(Res == 'D'){
+			FLASH_Read_FloatBuffer(WRITE_START_ADDR,SENDBUFF_SIZE);
+		}
+
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
 	} 
 } 
 #endif	
@@ -165,11 +151,11 @@ void USART2_printf (char *fmt, ...){
 void USART2_Init(u32 bound){ //串口1初始化并启动
     //GPIO端口设置
     GPIO_InitTypeDef GPIO_InitStructure;
-	USART_InitTypeDef USART_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-		 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE); //使能UART2所在GPIOA的时钟
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); //使能串口的RCC时钟
+		USART_InitTypeDef USART_InitStructure;
+		NVIC_InitTypeDef NVIC_InitStructure;
+			 
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE); //使能UART2所在GPIOA的时钟
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); //使能串口的RCC时钟
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3; //设置USART2的RX接口是PA3
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;//浮空输入
@@ -181,22 +167,22 @@ void USART2_Init(u32 bound){ //串口1初始化并启动
     GPIO_Init(GPIOA, &GPIO_InitStructure);  
 
    //USART2 初始化设置
-	USART_InitStructure.USART_BaudRate = bound;//一般设置为9600;
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
-	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
+		USART_InitStructure.USART_BaudRate = bound;//一般设置为9600;
+		USART_InitStructure.USART_WordLength = USART_WordLength_8b;//字长为8位数据格式
+		USART_InitStructure.USART_StopBits = USART_StopBits_1;//一个停止位
+		USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验位
+		USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件数据流控制
+		USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	//收发模式
     USART_Init(USART2, &USART_InitStructure); //初始化串口
     USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);//开启ENABLE/关闭DISABLE中断
     USART_Cmd(USART2, ENABLE);                    //使能串口 
    //Usart2 NVIC 配置
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+		NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
     NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//优先级3
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
-	NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器 
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=3 ;//抢占优先级3
+		NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;		//优先级3
+		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			//IRQ通道使能
+		NVIC_Init(&NVIC_InitStructure);	//根据指定的参数初始化VIC寄存器 
 }
 
 void USART2_IRQHandler(void){ //串口2中断服务程序（固定的函数名不能修改）	

@@ -5,6 +5,7 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h" 
+#include "internal_flash.h"
 #include "nvic.h"
 #include "tim.h"
 #include "mpu6050.h"
@@ -13,7 +14,8 @@
 #include "servo.h"
 
 u8 USART1_Queue[SENDBUFF_SIZE]={0};						//USARTx DMA发送缓存队列
-const u8 data_frequency = 20;								//PID更新及数传发送频率(TIMx中断频率)
+int FLASH_Queue[SENDBUFF_SIZE]={0};					//内部FLASH写入缓存队列
+const u8 data_frequency = 50;									//PID更新及数传发送频率(TIMx中断频率)
 float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数
 
 extern u8 INT_MARK;														//NVIC中断标志位
@@ -26,6 +28,7 @@ int main(void)
 	delay_init();
 	Delay_ms(500);
 	USART_Config();
+	USART1_Init(9600);
 	TIM_PWM_Init();
 	Buzzer_Init();
 	PID_Set_Goal(0,0,0);
@@ -38,6 +41,7 @@ int main(void)
 	USARTx_DMA_Config();
 	Delay_ms(1000);
 	BUZZER_BEEP_SHORT2;
+	printf("初始化完成！\r\n");
 	TIMx_Init(60000, 1200/data_frequency);	//计算公式：param1*param2*frequency = 72M	
 	NVIC_INIT();														//MPU6050开始输出数据
 	

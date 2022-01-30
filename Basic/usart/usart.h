@@ -26,6 +26,9 @@ extern u16 USART1_RX_STA;         		//接收状态标记
 extern u16 USART2_RX_STA;         		//接收状态标记	
 extern u16 USART3_RX_STA;         		//接收状态标记	
 
+extern u8 Is_Fire;										//接收到发射信号标志位
+extern u8 Is_SendData;								//接收到发射信号标志位
+		
 //函数声明
 void USART1_Init(u32 bound);//串口1初始化并启动
 void USART2_Init(u32 bound);//串口2初始化并启动
