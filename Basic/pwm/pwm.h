@@ -4,7 +4,7 @@
 #define 	PWMmax	 		60000
 #define 	PWM_TIMx		TIM3
 #define 	RCC_PWM_TIMx		RCC_APB1Periph_TIM3
-#define 	TIM_OCxPreloadConfig	TIM_OC3PreloadConfig
+
 
 #define 	PWM_GPIO_1	GPIOA
 #define 	PWM_Pin_1		GPIO_Pin_6

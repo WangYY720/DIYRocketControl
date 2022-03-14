@@ -46,13 +46,27 @@ void TIM_PWM_Init(){  //TIM_PWM初始化 arr重装载值 psc预分频系数
     TIM_OCInitStrue.TIM_OCMode=TIM_OCMode_PWM1;        							// PWM模式1:CNT < CCR时输出有效电平
     TIM_OCInitStrue.TIM_OCPolarity=TIM_OCPolarity_High;							// 设置极性-有效电平为：高电平
     TIM_OCInitStrue.TIM_OutputState=TIM_OutputState_Enable;					// 输出使能
-		
 		TIM_OC1Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道1 PWM 模式设置
-		TIM_OC2Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道2 PWM 模式设置
-		TIM_OC3Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道3 PWM 模式设置
-    TIM_OC4Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道4 PWM 模式设置
+		
+    TIM_OCInitStrue.TIM_OCMode=TIM_OCMode_PWM1;        							// PWM模式1:CNT < CCR时输出有效电平
+    TIM_OCInitStrue.TIM_OCPolarity=TIM_OCPolarity_High;							// 设置极性-有效电平为：高电平
+    TIM_OCInitStrue.TIM_OutputState=TIM_OutputState_Enable;					// 输出使能
+		TIM_OC2Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道1 PWM 模式设置
+		
+		TIM_OCInitStrue.TIM_OCMode=TIM_OCMode_PWM1;        							// PWM模式1:CNT < CCR时输出有效电平
+    TIM_OCInitStrue.TIM_OCPolarity=TIM_OCPolarity_High;							// 设置极性-有效电平为：高电平
+    TIM_OCInitStrue.TIM_OutputState=TIM_OutputState_Enable;					// 输出使能
+		TIM_OC3Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道1 PWM 模式设置
+		
+		TIM_OCInitStrue.TIM_OCMode=TIM_OCMode_PWM1;        							// PWM模式1:CNT < CCR时输出有效电平
+    TIM_OCInitStrue.TIM_OCPolarity=TIM_OCPolarity_High;							// 设置极性-有效电平为：高电平
+    TIM_OCInitStrue.TIM_OutputState=TIM_OutputState_Enable;					// 输出使能
+		TIM_OC4Init(PWM_TIMx,&TIM_OCInitStrue);        									//TIMx的通道1 PWM 模式设置
 
-    TIM_OCxPreloadConfig(PWM_TIMx,TIM_OCPreload_Enable);        		//使能预装载寄存器
+    TIM_OC1PreloadConfig(PWM_TIMx,TIM_OCPreload_Enable);        		//使能预装载寄存器
+		TIM_OC2PreloadConfig(PWM_TIMx,TIM_OCPreload_Enable);
+		TIM_OC3PreloadConfig(PWM_TIMx,TIM_OCPreload_Enable);
+		TIM_OC4PreloadConfig(PWM_TIMx,TIM_OCPreload_Enable);
     
     TIM_Cmd(PWM_TIMx,ENABLE);        																//使能TIM3   
 }

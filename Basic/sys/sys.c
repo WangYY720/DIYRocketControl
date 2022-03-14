@@ -1,5 +1,7 @@
 #include "sys.h"
 
+#define HSE 1
+
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK Mini STM32开发板
@@ -36,6 +38,8 @@ __asm void MSR_MSP(u32 addr)
     BX r14
 }
 void RCC_Configuration(void){ //RCC时钟的设置  
+	#ifdef HSE
+	
 	ErrorStatus HSEStartUpStatus;   
 	RCC_DeInit();              /* RCC system reset(for debug purpose) RCC寄存器恢复初始化值*/   
 	RCC_HSEConfig(RCC_HSE_ON); /* Enable HSE 使能外部高速晶振*/   
@@ -60,7 +64,35 @@ void RCC_Configuration(void){ //RCC时钟的设置
 		while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET); //等待PLL输出稳定   
 		RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK); //选择SYSCLK时钟源为PLL
 		while(RCC_GetSYSCLKSource() != 0x08); //等待PLL成为SYSCLK时钟源   
-	}
+	}  
+	/*开始使能程序中需要使用的外设时钟*/   
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |   
+	RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOE, ENABLE); //APB2外设时钟使能      
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); //APB1外设时钟使能  
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);   
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);   	 
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);  
+	
+	#else 
+	
+	RCC_DeInit();
+	RCC_HSICmd(ENABLE);
+	while(RCC_GetFlagStatus(RCC_FLAG_HSIRDY) == RESET);
+	
+	FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+	FLASH_SetLatency(FLASH_Latency_2);
+	
+	RCC_HCLKConfig(RCC_SYSCLK_Div1);
+	RCC_PCLK1Config(RCC_HCLK_Div2);
+	RCC_PCLK2Config(RCC_HCLK_Div1);
+//	RCC_ADCCLKConfig(RCC_PCLK2_Div4);
+	RCC_PLLConfig(RCC_PLLSource_HSI_Div2,RCC_PLLMul_10);
+	RCC_PLLCmd(ENABLE);
+	while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
+	RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+	while(RCC_GetSYSCLKSource() != 0x08);
+	
+	#endif
 }
 
 
