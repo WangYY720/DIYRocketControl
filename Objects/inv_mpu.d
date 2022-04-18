@@ -38,6 +38,8 @@
 .\objects\inv_mpu.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\inv_mpu.o: .\Basic\sys\sys.h
 .\objects\inv_mpu.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\inv_mpu.o: .\User\data.h
+.\objects\inv_mpu.o: .\Hardware\buzzer.h
 .\objects\inv_mpu.o: .\Basic\delay\delay.h
 .\objects\inv_mpu.o: .\Basic\usart\usart.h
 .\objects\inv_mpu.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdarg.h

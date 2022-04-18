@@ -5,7 +5,6 @@ int Flash_Write_FloatBuffer(int *buffer,u16 num)
 {
 	uint32_t EraseCounter = 0x03; 	//记录要擦除多少页
 	uint32_t Address = 0x00;				//记录写入的地址
-	uint32_t Data = 0x3210ABCD;			//记录写入的数据
 	uint32_t NbrOfPage = 0x00;			//记录写入多少页
 	
 	FLASH_Status FLASHStatus = FLASH_COMPLETE; //记录每次擦除的结果	

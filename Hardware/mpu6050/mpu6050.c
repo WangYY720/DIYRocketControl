@@ -18,6 +18,10 @@
 //初始化MPU6050
 //返回值:0,成功
 //    其他,错误代码
+
+#include "erorr.h"
+#include "nvic.h"
+
 u8 MPU_Init(void)
 { 
 	u8 res; 
@@ -235,5 +239,21 @@ u8 MPU_Read_Byte(u8 reg)
     MPU_IIC_Stop();			//产生一个停止条件 
 	return res;		
 }
+void GYRO_Init(void)
+{
+	u8 temp;
 
+	temp = MPU_Init();
+	if(temp){										//MPU6050初始化
+		printf("MPU初始化失败！！！！！！\r\n");	  //返回值为1则初始化失败
+		Erorr_MPU();
+	}
+	
+    temp = mpu_dmp_init();                          //MPU6050 DMP功能初始化 返回值为1则初始化失败
+	if(temp){					
+		printf("MPU_DMP初始化失败:erorr %d\r\n",temp);		
+		Erorr_MPU();
+	}
 
+	NVIC_INIT();									//MPU6050开始输出数据
+}

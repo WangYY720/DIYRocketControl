@@ -99,18 +99,15 @@ void USART1_IRQHandler(void){ //串口1中断服务程序（固定的函数名�
 		Res = USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
 		
 		if(Res == 'f'){
-			printf(" 开始发射程序! \r \n");
-			BUZZER_BEEP_LONG1;
-			Is_Fire=1;					//接收到发射信号
-
+			Is_Fire = 1;					//接收到发射信号
 		}
 		
 		if(Res == 'd'){
-			Is_SendData=1;			//接收到发送数据信号
+			Is_SendData = 1;			//接收到发送数据信号
 		}
 		
 		if(Res == 'D'){
-			FLASH_Read_FloatBuffer(WRITE_START_ADDR,SENDBUFF_SIZE);
+			Is_ReadFlash = 1;
 		}
 
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE);

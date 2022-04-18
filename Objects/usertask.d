@@ -43,6 +43,7 @@
 .\objects\usertask.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\usertask.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
 .\objects\usertask.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\usertask.o: .\User\data.h
 .\objects\usertask.o: .\Hardware\buzzer.h
 .\objects\usertask.o: .\Hardware\pid.h
 .\objects\usertask.o: .\Hardware\servo.h

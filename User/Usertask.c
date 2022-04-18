@@ -20,9 +20,16 @@ void task2_task(void *pvParameters);
 TaskHandle_t	Task3Task_Handle;
 void task3_task(void *pvParameters);
 
-extern u8 USART1_Queue[SENDBUFF_SIZE];						//USARTx DMA发送缓存队列
+extern u8 USART1_Queue[SENDBUFF_SIZE];					//USARTx DMA发送缓存队列
 extern int FLASH_Queue[SENDBUFF_SIZE];					//内部FLASH写入缓存队列
-extern float acc[3],gyro[3],angle[3],quat[4];				//加速度、角速度、角度、四元数
+extern float acc[3],gyro[3],angle[3],quat[4];			//加速度、角速度、角度、四元数
+
+u16 Queue_Pos = 0;		
+u8 Is_Fire = 0;											//接收到发射信号标志位
+u8 Is_SendData = 0,Is_Senddata_Again = 0;				//接收到传输数据标志位
+u8 Is_FlashWrite = 0,Is_ReadFlash = 0;					//接收读写flash标志位
+u8 Is_OpenFairing = 0;									//接收到开伞信号标志位
+float fire_time=0;
 
 void start_task(void *pvParameters)
 {
@@ -58,28 +65,77 @@ void start_task(void *pvParameters)
 							
 	taskEXIT_CRITICAL();
 }
-
+u8 float2char(float Xfloat)
+{
+//	u8 Xchar;
+	if(Xfloat >= 128)
+		return 255;
+	else if(Xfloat <= -128)
+		return 0;
+	else return (int)Xfloat+128;
+}
 void task1_task(void *pvParameters)
 {
-	u8 temp;
-	TIMx_Init(60000,1200/50);						//定时器初始化	
-	
-	if(MPU_Init())									//MPU6050初始化
-		printf("MPU初始化失败！！！！！！\r\n");	  //返回值为1则初始化失败
-	
-    temp = mpu_dmp_init();                          //MPU6050 DMP功能初始化 返回值为1则初始化失败
-	while(temp){					
-		printf("mpu_dmp erorr %d\r\n",temp);		//默认上电加速度校准，需水平放置
-		Erorr_MPU();
-	}
+	TIMx_Init(60000,1200/50);			//定时器初始化	
+	GYRO_Init();						//MPU6050陀螺仪初始化,开启I2C读取中断
 
-	NVIC_INIT();						//MPU6050开始输出数据
+	LED_ON;
+	BUZZER_BEEP_LONG1;
+	printf("初始化完成！\r\n");
+
 	while(1)
 	{
-		LED_ON;
-		vTaskDelay(50);
-		LED_OFF;
-		vTaskDelay(50);
+		if(Is_Fire){
+			if(fire_time < 0.001){
+				printf("开始发射程序！\r\n");
+				BUZZER_BEEP_LONG1;
+			}
+			if(fire_time <=TIME_Recode){
+				USART1_Queue[Queue_Pos] 	= float2char(angle[0]);
+				USART1_Queue[Queue_Pos+1] 	= float2char(angle[1]);
+				USART1_Queue[Queue_Pos+2] 	= float2char(angle[2]);
+				FLASH_Queue[Queue_Pos] 		= (int)(angle[0]*100.0);
+				FLASH_Queue[Queue_Pos+1]	= (int)(angle[1]*100.0);
+				FLASH_Queue[Queue_Pos+2]	= (int)(angle[2]*100.0);
+				Queue_Pos += 3;
+			}
+			if(fire_time>TIME_Parachute && !Is_OpenFairing){
+				BUZZER_BEEP_SHORT1;
+				Is_OpenFairing = 1;
+				printf("已经触发开伞 \r\n");
+			}
+			if(fire_time>TIME_Recode+1 && !Is_FlashWrite){
+				Flash_Write_FloatBuffer(FLASH_Queue,SENDBUFF_SIZE);
+				BUZZER_BEEP_SHORT1;
+				Is_FlashWrite = 1;
+				printf("已经将飞行数据写入FLASH \r\n");
+			}
+			fire_time += 1.0/(float)data_frequency;
+			// printf("%.2f \n",fire_time);
+			
+		}
+
+		if(Is_SendData){
+			if(Is_Senddata_Again){
+				USARTx_DMA_NOAMAL_RESTART();
+				USART_DMACmd(DEBUG_USARTx, USART_DMAReq_Tx ,DISABLE);
+				DMA_ClearFlag(USART_TX_DMA_TCFLAG);
+			}
+			USART_DMACmd(DEBUG_USARTx, USART_DMAReq_Tx ,ENABLE);
+			BUZZER_BEEP_SHORT1;
+			Is_Senddata_Again = 1;
+			Is_SendData = 0;
+		}
+		
+		if(Is_ReadFlash){
+			Is_ReadFlash = 0;
+			FLASH_Read_FloatBuffer(WRITE_START_ADDR,SENDBUFF_SIZE);
+		}
+
+		Pitch_angle = PID_Pitch(angle[0]);
+		Roll_angle  = PID_Roll(angle[1]);
+
+		vTaskDelay(1000/data_frequency);
 	}
 }
 //线程2：驱动舵机
@@ -118,6 +174,9 @@ void task3_task(void *pvParameters)
 {
 	while(1)
 	{
+		LED_ON;
+		vTaskDelay(50);
+		LED_OFF;
 		vTaskDelay(50);
 	}
 }

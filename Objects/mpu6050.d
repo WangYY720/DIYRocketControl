@@ -34,8 +34,12 @@
 .\objects\mpu6050.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
 .\objects\mpu6050.o: .\Basic\dma\bsp_usart_dma.h
 .\objects\mpu6050.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\mpu6050.o: .\User\data.h
+.\objects\mpu6050.o: .\Hardware\buzzer.h
 .\objects\mpu6050.o: .\Basic\delay\delay.h
 .\objects\mpu6050.o: .\Basic\usart\usart.h
 .\objects\mpu6050.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\mpu6050.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\mpu6050.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\mpu6050.o: .\User\erorr.h
+.\objects\mpu6050.o: .\Basic\nvic\nvic.h

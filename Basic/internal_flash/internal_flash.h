@@ -11,8 +11,8 @@
 #endif
 
 //写入的起始地址与结束地址
-#define WRITE_START_ADDR  ((uint32_t)0x0800a000)
-#define WRITE_END_ADDR    ((uint32_t)0x08010000)
+#define WRITE_START_ADDR  ((uint32_t)0x0800c000)
+#define WRITE_END_ADDR    ((uint32_t)0x0801f000)
 
 int Flash_Write_FloatBuffer(int *buffer,u16 num);
 void FLASH_Read_FloatBuffer(u32 address,u16 num);

@@ -30,3 +30,7 @@
 .\objects\bsp_usart_dma.o: .\Lib\inc\stm32f10x_wwdg.h
 .\objects\bsp_usart_dma.o: .\Lib\inc\misc.h
 .\objects\bsp_usart_dma.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\bsp_usart_dma.o: .\User\data.h
+.\objects\bsp_usart_dma.o: .\Hardware\buzzer.h
+.\objects\bsp_usart_dma.o: .\Basic\delay\delay.h
+.\objects\bsp_usart_dma.o: .\Basic\sys\sys.h

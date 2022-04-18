@@ -29,3 +29,7 @@
 .\objects\pid.o: .\Lib\inc\stm32f10x_usart.h
 .\objects\pid.o: .\Lib\inc\stm32f10x_wwdg.h
 .\objects\pid.o: .\Lib\inc\misc.h
+.\objects\pid.o: .\User\data.h
+.\objects\pid.o: .\Hardware\buzzer.h
+.\objects\pid.o: .\Basic\delay\delay.h
+.\objects\pid.o: .\Basic\sys\sys.h

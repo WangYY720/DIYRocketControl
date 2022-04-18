@@ -37,6 +37,7 @@
 .\objects\usart.o: .\Hardware\buzzer.h
 .\objects\usart.o: .\Basic\delay\delay.h
 .\objects\usart.o: .\Basic\dma\bsp_usart_dma.h
+.\objects\usart.o: .\User\data.h
 .\objects\usart.o: .\Basic\internal_flash\internal_flash.h
 .\objects\usart.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\usart.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stddef.h

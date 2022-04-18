@@ -1,6 +1,5 @@
 #include "pid.h"
-
-extern u8 data_frequency;
+#include "data.h"
 	
 float GPitch,GRoll,GYaw;
 float EPitch,ERoll,EYaw;
@@ -9,20 +8,25 @@ float LPitch,LRoll,LYaw;
 float DPitch,DRoll,DYaw;
 float temp;
 
+#define Kp 0.5
+#define Ki 0.05
+#define Kd 0
+#define dt 1.0/(float)data_frequency
+
 void PID_Init(void)
 {
-	Inte_Pitch = 0;
-	Inte_Roll  = 0;
-	Inte_Yaw	 = 0;
-	Last_Pitch = 0;
-	Last_Roll  = 0;
-	Last_Yaw	 = 0;
+	Inte_Pitch 	= 0;
+	Inte_Roll  	= 0;
+	Inte_Yaw	= 0;
+	Last_Pitch 	= 0;
+	Last_Roll  	= 0;
+	Last_Yaw	= 0;
 }
 void PID_Set_Goal(float pitch,float roll,float yaw)
 {
 	GPitch  = pitch;
 	GRoll 	= roll;
-	GYaw		= yaw;
+	GYaw	= yaw;
 //	PID_Init();
 }
 float PID_Pitch(float CurPitch)
@@ -79,6 +83,4 @@ float PID_Roll(float CurRoll)
 float PID_Yaw(float CurYaw)
 {
 	if(!Is_PID_Yaw) return 0;
-	
-	return 0;
 }

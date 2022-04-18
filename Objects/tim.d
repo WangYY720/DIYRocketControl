@@ -32,8 +32,10 @@
 .\objects\tim.o: .\Lib\inc\misc.h
 .\objects\tim.o: .\Basic\dma\bsp_usart_dma.h
 .\objects\tim.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\tim.o: .\User\data.h
+.\objects\tim.o: .\Hardware\buzzer.h
+.\objects\tim.o: .\Basic\delay\delay.h
 .\objects\tim.o: .\Hardware\servo.h
 .\objects\tim.o: .\Basic\pwm\pwm.h
 .\objects\tim.o: .\Hardware\pid.h
-.\objects\tim.o: .\Hardware\buzzer.h
 .\objects\tim.o: .\Basic\internal_flash\internal_flash.h

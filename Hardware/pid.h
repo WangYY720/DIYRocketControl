@@ -13,34 +13,29 @@ extern float IPitch,IRoll,IYaw;
 extern float LPitch,LRoll,LYaw;
 extern float DPitch,DRoll,DYaw;
 
-#define Goal_Pitch	GPitch
+#define Goal_Pitch	    GPitch
 #define Goal_Roll		GRoll
 #define Goal_Yaw		GYaw
-#define Erorr_Pitch	EPitch
-#define Erorr_Roll	ERoll
+#define Erorr_Pitch	    EPitch
+#define Erorr_Roll	    ERoll
 #define Erorr_Yaw		EYaw
-#define Inte_Pitch	IPitch
+#define Inte_Pitch  	IPitch
 #define Inte_Roll		IRoll
 #define Inte_Yaw		IYaw
-#define Last_Pitch	LPitch
+#define Last_Pitch	    LPitch
 #define Last_Roll		LRoll
-#define Last_Yaw	  LYaw
-#define Diff_Pitch  DPitch
-#define Diff_Roll		DRoll
-#define Diff_Yaw	  DYaw
+#define Last_Yaw	    LYaw
+#define Diff_Pitch      DPitch
+#define Diff_Roll	    DRoll
+#define Diff_Yaw	    DYaw
 
-#define MaxI_Pitch	50
+#define MaxI_Pitch	    50
 #define MaxI_Roll		50
 #define MaxI_Yaw		50
 
 #define Max_Pitch		30
 #define Max_Roll		30
 #define Max_Yaw			30
-
-#define Kp 0.5
-#define Ki 0.05
-#define Kd 0
-#define dt 1.0/(float)data_frequency
 
 void PID_Init(void);
 void PID_Set_Goal(float pitch,float roll,float yaw);

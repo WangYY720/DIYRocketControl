@@ -1,18 +1,17 @@
 #ifndef __USARTDMA_H
 #define	__USARTDMA_H
 
-
 #include "stm32f10x.h"
 #include <stdio.h>
+#include "data.h"
 
-
-// ´®¿Ú¹¤×÷²ÎÊıºê¶¨Òå
+// ä¸²å£å·¥ä½œå‚æ•°å®å®šä¹‰
 #define  DEBUG_USARTx                   USART1
 #define  DEBUG_USART_CLK                RCC_APB2Periph_USART1
 #define  DEBUG_USART_APBxClkCmd         RCC_APB2PeriphClockCmd
 #define  DEBUG_USART_BAUDRATE           9600
 
-// USART GPIO Òı½Åºê¶¨Òå
+// USART GPIO å¼•è„šå®å®šä¹‰
 #define  DEBUG_USART_GPIO_CLK           (RCC_APB2Periph_GPIOA)
 #define  DEBUG_USART_GPIO_APBxClkCmd    RCC_APB2PeriphClockCmd
     
@@ -21,16 +20,13 @@
 #define  DEBUG_USART_RX_GPIO_PORT       GPIOA
 #define  DEBUG_USART_RX_GPIO_PIN        GPIO_Pin_10
 
-// ´®¿Ú¶ÔÓ¦µÄDMAÇëÇóÍ¨µÀ
-#define  USART_TX_DMA_CHANNEL     DMA1_Channel4
-#define  USART_TX_DMA_TC					DMA1_IT_TC4
-#define  USART_TX_DMA_TCFLAG      DMA1_FLAG_TC4
+// ä¸²å£å¯¹åº”çš„DMAè¯·æ±‚é€šé“
+#define  USART_TX_DMA_CHANNEL           DMA1_Channel4
+#define  USART_TX_DMA_TC				DMA1_IT_TC4
+#define  USART_TX_DMA_TCFLAG            DMA1_FLAG_TC4
 #define  USART_TX_DMA_ITFLAG			DMA_FLAG_TC4
-// ÍâÉè¼Ä´æÆ÷µØÖ·
-#define  USART_DR_ADDRESS    (USART1_BASE+0x04)
-// Ò»´Î·¢ËÍµÄÊı¾İÁ¿
-#define  SENDBUFF_SIZE       1000
-
+// å¤–è®¾å¯„å­˜å™¨åœ°å€
+#define  USART_DR_ADDRESS               (USART1_BASE+0x04)      
 
 void USART_Config(void);
 void USARTx_DMA_Config(void);

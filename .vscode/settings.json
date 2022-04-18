@@ -4,6 +4,10 @@
         "usertask.h": "c",
         "main.h": "c",
         "erorr.h": "c",
-        "delay.h": "c"
+        "delay.h": "c",
+        "mpu6050.h": "c",
+        "data.h": "c",
+        "pid.h": "c",
+        "usart.h": "c"
     }
 }
