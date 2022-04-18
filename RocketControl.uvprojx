@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>mpu6050</TargetName>
+      <TargetName>RocketControl</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
@@ -515,6 +515,16 @@
               <FileType>1</FileType>
               <FilePath>.\User\stm32f10x_it.c</FilePath>
             </File>
+            <File>
+              <FileName>Usertask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\Usertask.c</FilePath>
+            </File>
+            <File>
+              <FileName>erorr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\erorr.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -559,6 +569,51 @@
               <FileName>servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\servo.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FreeRTOS</GroupName>
+          <Files>
+            <File>
+              <FileName>croutine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\croutine.c</FilePath>
+            </File>
+            <File>
+              <FileName>event_groups.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\event_groups.c</FilePath>
+            </File>
+            <File>
+              <FileName>list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\list.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\tasks.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\timers.c</FilePath>
+            </File>
+            <File>
+              <FileName>heap_4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\portable\MemMang\heap_4.c</FilePath>
+            </File>
+            <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\FreeRTOS\portable\RVDS\ARM_CM3\port.c</FilePath>
             </File>
           </Files>
         </Group>

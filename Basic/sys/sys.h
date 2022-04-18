@@ -13,9 +13,9 @@
 //All rights reserved
 ////////////////////////////////////////////////////////////////////////////////// 	 
 
-//0,不支持ucos
-//1,支持ucos
-#define SYSTEM_SUPPORT_OS		0		//定义系统文件夹是否支持UCOS
+//0,不支持os
+//1,支持os
+#define SYSTEM_SUPPORT_OS		1		//定义系统文件夹是否支持OS
 																	    
 	 
 //位带操作,实现51类似的GPIO控制功能
@@ -64,7 +64,6 @@
 #define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)  //输出 
 #define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入
 
-void RCC_Configuration(void);
 //以下为汇编函数
 void WFI_SET(void);		//执行WFI指令
 void INTX_DISABLE(void);//关闭所有中断

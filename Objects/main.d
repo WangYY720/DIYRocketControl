@@ -1,4 +1,5 @@
 .\objects\main.o: User\main.c
+.\objects\main.o: User\main.h
 .\objects\main.o: .\CMSIS\stm32f10x.h
 .\objects\main.o: .\CMSIS\core_cm3.h
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -46,3 +47,16 @@
 .\objects\main.o: .\Hardware\pid.h
 .\objects\main.o: .\Hardware\servo.h
 .\objects\main.o: .\Basic\pwm\pwm.h
+.\objects\main.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: .\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\main.o: .\FreeRTOS\include\projdefs.h
+.\objects\main.o: .\FreeRTOS\include\portable.h
+.\objects\main.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\main.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\objects\main.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\main.o: .\FreeRTOS\include\task.h
+.\objects\main.o: .\FreeRTOS\include\list.h
+.\objects\main.o: User\usertask.h
+.\objects\main.o: User\erorr.h
+.\objects\main.o: User\usertask.h

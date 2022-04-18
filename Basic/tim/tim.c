@@ -9,35 +9,35 @@
 u8 flag=0;
 extern u8 USART1_Queue[SENDBUFF_SIZE];
 extern int FLASH_Queue[SENDBUFF_SIZE];
-extern float acc[3],gyro[3],angle[3],quat[4];				//¼ÓËÙ¶È¡¢½ÇËÙ¶È¡¢½Ç¶È¡¢ËÄÔªÊý
-extern const u8 data_frequency;											//PID¸üÐÂ¼°Êý´«·¢ËÍÆµÂÊ(TIMxÖÐ¶ÏÆµÂÊ)
-u16 Queue_Pos = 0;		//¶ÓÁÐÐ´ÈëÎ»ÖÃ·û
-u8 Is_Fire = 0;				//½ÓÊÕµ½·¢ÉäÐÅºÅ±êÖ¾Î»
-u8 Is_SendData = 0;		//½ÓÊÕµ½·¢ÉäÐÅºÅ±êÖ¾Î»
+extern float acc[3],gyro[3],angle[3],quat[4];				//ï¿½ï¿½ï¿½Ù¶È¡ï¿½ï¿½ï¿½ï¿½Ù¶È¡ï¿½ï¿½Ç¶È¡ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+extern const u8 data_frequency;											//PIDï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½(TIMxï¿½Ð¶ï¿½Æµï¿½ï¿½)
+u16 Queue_Pos = 0;		//ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Î»ï¿½Ã·ï¿½
+u8 Is_Fire = 0;				//ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅºÅ±ï¿½Ö¾Î»
+u8 Is_SendData = 0;		//ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅºÅ±ï¿½Ö¾Î»
 u8 Is_Senddata_Again = 0;
 u8 Is_OpenFairing = 0 ,Is_FlashWrite = 0;
 float fire_time=0;
 
-void TIMx_Init(u16 arr,u16 psc){  														//TIM3 ³õÊ¼»¯ arrÖØ×°ÔØÖµ pscÔ¤·ÖÆµÏµÊý
+void TIMx_Init(u16 arr,u16 psc){  														//TIM3 ï¿½ï¿½Ê¼ï¿½ï¿½ arrï¿½ï¿½×°ï¿½ï¿½Öµ pscÔ¤ï¿½ï¿½ÆµÏµï¿½ï¿½
     TIM_TimeBaseInitTypeDef     TIM_TimeBaseInitStrue;
     
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIMx,ENABLE);				//Ê¹ÄÜTIMx
-    TIMx_NVIC_Init(); 																				//¿ªÆôTIMxÖÐ¶ÏÏòÁ¿
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIMx,ENABLE);				//Ê¹ï¿½ï¿½TIMx
+    TIMx_NVIC_Init(); 																				//ï¿½ï¿½ï¿½ï¿½TIMxï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	      
-    TIM_TimeBaseInitStrue.TIM_Period=arr-1; 									//ÉèÖÃ×Ô¶¯ÖØ×°ÔØÖµ
-    TIM_TimeBaseInitStrue.TIM_Prescaler=psc-1; 								//Ô¤·ÖÆµÏµÊý
-    TIM_TimeBaseInitStrue.TIM_CounterMode=TIM_CounterMode_Up; //¼ÆÊýÆ÷ÏòÉÏÒç³ö
-    TIM_TimeBaseInitStrue.TIM_ClockDivision=TIM_CKD_DIV1; 		//Ê±ÖÓµÄ·ÖÆµÒò×Ó£¬Æðµ½ÁËÒ»µãµãµÄÑÓÊ±×÷ÓÃ£¬Ò»°ãÉèÎªTIM_CKD_DIV1
-    TIM_TimeBaseInit(TIMx,&TIM_TimeBaseInitStrue); 						//TIMx³õÊ¼»¯ÉèÖÃ
-    TIM_ITConfig(TIMx, TIM_IT_Update, ENABLE);								//Ê¹ÄÜTIMxÖÐ¶Ï    
-    TIM_Cmd(TIMx,ENABLE); 																		//Ê¹ÄÜTIMx
+    TIM_TimeBaseInitStrue.TIM_Period=arr-1; 									//ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½×°ï¿½ï¿½Öµ
+    TIM_TimeBaseInitStrue.TIM_Prescaler=psc-1; 								//Ô¤ï¿½ï¿½ÆµÏµï¿½ï¿½
+    TIM_TimeBaseInitStrue.TIM_CounterMode=TIM_CounterMode_Up; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    TIM_TimeBaseInitStrue.TIM_ClockDivision=TIM_CKD_DIV1; 		//Ê±ï¿½ÓµÄ·ï¿½Æµï¿½ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ÎªTIM_CKD_DIV1
+    TIM_TimeBaseInit(TIMx,&TIM_TimeBaseInitStrue); 						//TIMxï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    TIM_ITConfig(TIMx, TIM_IT_Update, ENABLE);								//Ê¹ï¿½ï¿½TIMxï¿½Ð¶ï¿½    
+    TIM_Cmd(TIMx,ENABLE); 																		//Ê¹ï¿½ï¿½TIMx
 }
 
-void TIMx_NVIC_Init (void){ 																	//¿ªÆôTIMxÖÐ¶ÏÏòÁ¿
+void TIMx_NVIC_Init (void){ 																	//ï¿½ï¿½ï¿½ï¿½TIMxï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = TIMx_IRQn;	
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x3;	//ÉèÖÃÇÀÕ¼ºÍ×ÓÓÅÏÈ¼¶
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x3;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x4;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
@@ -52,9 +52,9 @@ u8 float2char(float Xfloat)
 	else return (int)Xfloat+128;
 }
 
-void TIMx_IRQHandler(void){ 																	//TIMxÖÐ¶Ï´¦Àíº¯Êý
+void TIMx_IRQHandler(void){ 																	//TIMxï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	if (TIM_GetITStatus(TIMx, TIM_IT_Update) != RESET){				//ÅÐ¶ÏÊÇ·ñÊÇTIMxÖÐ¶Ï
+	if (TIM_GetITStatus(TIMx, TIM_IT_Update) != RESET){				//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½TIMxï¿½Ð¶ï¿½
 			TIM_ClearITPendingBit(TIMx, TIM_IT_Update);
 			
 		if(Is_Fire){
@@ -70,13 +70,13 @@ void TIMx_IRQHandler(void){ 																	//TIMxÖÐ¶Ï´¦Àíº¯Êý
 			if(fire_time>5 && !Is_OpenFairing){
 				BUZZER_BEEP_SHORT1;
 				Is_OpenFairing = 1;
-				printf("ÒÑ´¥·¢¿ªÉ¡£¡\r\n");
+				printf("ï¿½Ñ´ï¿½ï¿½ï¿½ï¿½ï¿½É¡ï¿½ï¿½\r\n");
 			}
 			if(fire_time>13 && !Is_FlashWrite){
 				Flash_Write_FloatBuffer(FLASH_Queue,SENDBUFF_SIZE);
 				BUZZER_BEEP_SHORT1;
 				Is_FlashWrite = 1;
-				printf("ÒÑ½«·ÉÐÐÊý¾ÝÐ´ÈëFLASH£¡\r\n");
+				printf("ï¿½Ñ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½FLASHï¿½ï¿½\r\n");
 			}
 			fire_time += 1.0/(float)data_frequency;
 			

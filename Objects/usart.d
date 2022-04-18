@@ -38,3 +38,11 @@
 .\objects\usart.o: .\Basic\delay\delay.h
 .\objects\usart.o: .\Basic\dma\bsp_usart_dma.h
 .\objects\usart.o: .\Basic\internal_flash\internal_flash.h
+.\objects\usart.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\usart.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\usart.o: .\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\usart.o: .\FreeRTOS\include\projdefs.h
+.\objects\usart.o: .\FreeRTOS\include\portable.h
+.\objects\usart.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\usart.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\objects\usart.o: .\FreeRTOS\include\mpu_wrappers.h
