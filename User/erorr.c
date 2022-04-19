@@ -1,6 +1,6 @@
 #include "erorr.h"
 
-#define DELAY		delay_xms(2000)
+#define DELAY	delay_xms(2000)
 
 void LED_beep(u8 times)
 {	

@@ -43,5 +43,4 @@ float PID_Pitch(float CurPitch);
 float PID_Roll(float CurRoll);
 float PID_Yaw(float CurYaw);
 
-
 #endif

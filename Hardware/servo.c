@@ -1,7 +1,5 @@
 #include "servo.h"
 
-float Pitch_angle=0,Roll_angle=0,Yaw_angle=0;
-
 void ServoSet(u8 channel,float degree)
 {
 	switch(channel){

@@ -43,11 +43,12 @@
 .\objects\main.o: .\Hardware\mpu6050\mpuiic.h
 .\objects\main.o: .\Hardware\mpu6050\eMPL\inv_mpu.h
 .\objects\main.o: .\Basic\dma\bsp_usart_dma.h
-.\objects\main.o: .\User\data.h
+.\objects\main.o: .\User\rocket.h
 .\objects\main.o: .\Hardware\buzzer.h
-.\objects\main.o: .\Hardware\pid.h
 .\objects\main.o: .\Hardware\servo.h
 .\objects\main.o: .\Basic\pwm\pwm.h
+.\objects\main.o: .\User\pid.h
+.\objects\main.o: .\Hardware\fire.h
 .\objects\main.o: .\FreeRTOS\include\FreeRTOS.h
 .\objects\main.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: .\FreeRTOS\include\FreeRTOSConfig.h

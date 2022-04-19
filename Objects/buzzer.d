@@ -1,6 +1,5 @@
 .\objects\buzzer.o: Hardware\buzzer.c
 .\objects\buzzer.o: Hardware\buzzer.h
-.\objects\buzzer.o: .\Lib\inc\stm32f10x_gpio.h
 .\objects\buzzer.o: .\CMSIS\stm32f10x.h
 .\objects\buzzer.o: .\CMSIS\core_cm3.h
 .\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -32,3 +31,18 @@
 .\objects\buzzer.o: .\Lib\inc\misc.h
 .\objects\buzzer.o: .\Basic\delay\delay.h
 .\objects\buzzer.o: .\Basic\sys\sys.h
+.\objects\buzzer.o: .\FreeRTOS\include\FreeRTOS.h
+.\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\buzzer.o: .\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\buzzer.o: .\Basic\usart\usart.h
+.\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\buzzer.o: E:\Keil_5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\buzzer.o: .\FreeRTOS\include\projdefs.h
+.\objects\buzzer.o: .\FreeRTOS\include\portable.h
+.\objects\buzzer.o: .\FreeRTOS\include\deprecated_definitions.h
+.\objects\buzzer.o: .\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+.\objects\buzzer.o: .\FreeRTOS\include\mpu_wrappers.h
+.\objects\buzzer.o: .\FreeRTOS\include\task.h
+.\objects\buzzer.o: .\FreeRTOS\include\list.h

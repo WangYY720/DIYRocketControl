@@ -3,8 +3,12 @@
 #include "usart.h"
 #include "inv_mpu.h"
 
+extern float MPU_Acceleration[3];       //加速度
+extern float MPU_AngularVelocity[3];    //角速度
+extern float MPU_Angle[3];              //角度
+extern float MPU_Quat[4];				//四元数	
+
 u8 INT_MARK;//中断标志位
-extern float acc[3],gyro[3],angle[3],quat[4];
 
 void NVIC_INIT (void){	 
 	NVIC_InitTypeDef  NVIC_InitStruct;
@@ -34,7 +38,7 @@ void NVIC_INIT (void){
 //中断尽可能时间短 否则可能导致数据获取失败！
 void  EXTI0_IRQHandler(void){
 	if(EXTI_GetITStatus(EXTI_Line0)!=RESET){//判断某个线上的中断是否发生 
-		if(mpu_dmp_get_data(angle,angle+1,angle+2,quat)){
+		if(mpu_dmp_get_data(MPU_Angle,MPU_Angle+1,MPU_Angle+2,MPU_Quat)){
 			// printf("%f\n",angle);
 			//printf("mpu_dmp_get_data Failed erorr num:%d\n\r",INT_MARK);
 			}	//若返回值为1则证明DMP获取数据失败

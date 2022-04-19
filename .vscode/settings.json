@@ -8,6 +8,10 @@
         "mpu6050.h": "c",
         "data.h": "c",
         "pid.h": "c",
-        "usart.h": "c"
+        "usart.h": "c",
+        "bsp_usart_dma.h": "c",
+        "fire.h": "c",
+        "buzzer.h": "c",
+        "servo.h": "c"
     }
 }

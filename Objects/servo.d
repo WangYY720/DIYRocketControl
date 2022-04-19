@@ -31,4 +31,4 @@
 .\objects\servo.o: .\Lib\inc\misc.h
 .\objects\servo.o: .\Basic\pwm\pwm.h
 .\objects\servo.o: .\Basic\sys\sys.h
-.\objects\servo.o: Hardware\pid.h
+.\objects\servo.o: .\User\pid.h

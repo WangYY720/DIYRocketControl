@@ -5,6 +5,11 @@
 #include "bsp_usart_dma.h"
 #include "internal_flash.h"
 	  	 
+extern u8 Is_Launch;					  //接收到发射信号标志位
+extern u8 Is_SendData;					//接收到发送数据标志位
+extern u8 Is_FlashRead;					//接收到读取数据标志位
+extern u8 Is_ContactCheck;      //接收到检查通讯状态标志位 	
+
 //使UASRT串口可用printf函数发送
 //在usart.h文件里可更换使用printf函数的串口号	  
 #if 1
@@ -97,18 +102,22 @@ void USART1_IRQHandler(void){ //串口1中断服务程序（固定的函数名�
 	u8 Res;
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){	
 		Res = USART_ReceiveData(USART1);//(USART1->DR);	//读取接收到的数据
-		
+		// 接收到发射信号
 		if(Res == 'f'){
-			Is_Fire = 1;					//接收到发射信号
+			Is_Launch = 1;				
 		}
-		
+		// 接收到发送数据信号
 		if(Res == 'd'){
-			Is_SendData = 1;			//接收到发送数据信号
+			Is_SendData = 1;			
 		}
-		
+		// 接收到读写FLASH信号
 		if(Res == 'D'){
-			Is_ReadFlash = 1;
+			Is_FlashRead = 1;
 		}
+    // 接收到串口通讯检查信号
+    if(Res == 'c'){
+      Is_ContactCheck = 1;
+    }
 
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
 	} 
